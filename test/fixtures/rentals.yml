@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  item_id: 1
+  rental_start_date: 2018-11-02 20:43:31
+  rental_end_date: 2018-11-02 20:43:31
+  buyer_checkin_confirm: false
+  seller_checkin_confirm: false
+  total_price: 1.5
+  assistance: false
+  comment: MyText
+
+two:
+  user_id: 1
+  item_id: 1
+  rental_start_date: 2018-11-02 20:43:31
+  rental_end_date: 2018-11-02 20:43:31
+  buyer_checkin_confirm: false
+  seller_checkin_confirm: false
+  total_price: 1.5
+  assistance: false
+  comment: MyText
