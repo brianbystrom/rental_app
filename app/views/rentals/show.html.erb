@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @rental.user_id %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @rental.item_id %>
+</p>
+
+<p>
+  <strong>Rental start date:</strong>
+  <%= @rental.rental_start_date %>
+</p>
+
+<p>
+  <strong>Rental end date:</strong>
+  <%= @rental.rental_end_date %>
+</p>
+
+<p>
+  <strong>Buyer checkin confirm:</strong>
+  <%= @rental.buyer_checkin_confirm %>
+</p>
+
+<p>
+  <strong>Seller checkin confirm:</strong>
+  <%= @rental.seller_checkin_confirm %>
+</p>
+
+<p>
+  <strong>Total price:</strong>
+  <%= @rental.total_price %>
+</p>
+
+<p>
+  <strong>Assistance:</strong>
+  <%= @rental.assistance %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @rental.comment %>
+</p>
+
+<%= link_to 'Edit', edit_rental_path(@rental) %> |
+<%= link_to 'Back', rentals_path %>
