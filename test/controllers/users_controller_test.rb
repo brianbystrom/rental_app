@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @user = users(:one)
+  
+  def setup
+    @user = users(:brian)
   end
 
   test "should get index" do
@@ -16,8 +17,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create user" do
+    #Destroy user created because for some reason when we create the temp user in the setup method above it creates the same user and it cannot be remade
+    User.destroy(890002738)
     assert_difference('User.count') do
-      post users_url, params: { user: { admin: @user.admin, email: @user.email, fname: @user.fname, lname: @user.lname, password: @user.password, status: @user.status, username: @user.username } }
+      post users_url, params: { user: { admin: @user.admin, email: @user.email, fname: @user.fname, lname: @user.lname, password: "password", status: @user.status, username: @user.username } }
     end
 
     assert_redirected_to user_url(User.last)
@@ -34,7 +37,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update user" do
-    patch user_url(@user), params: { user: { admin: @user.admin, email: @user.email, fname: @user.fname, lname: @user.lname, password: @user.password, status: @user.status, username: @user.username } }
+    patch user_url(@user), params: { user: { admin: @user.admin, email: @user.email, fname: @user.fname, lname: @user.lname, password: "password", password_confirmation: "password", status: @user.status, username: @user.username } }
     assert_redirected_to user_url(@user)
   end
 
