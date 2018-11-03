@@ -1,3 +1,9 @@
+<% if logged_in? %>
+  <%= current_user.id %>
+<% else %>
+  NOpe
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -37,3 +43,6 @@
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+<%= link_to "Log out", logout_path, method: :delete %>
+
+<%= debug(params) if Rails.env.development? %>
