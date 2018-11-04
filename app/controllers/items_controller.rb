@@ -25,29 +25,60 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
-
-    respond_to do |format|
+    
+    if logged_in?
+      puts "User logged in, can create item."
+      puts current_user.username
+      
+      @item.user_id = current_user.id
+      
       if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
+        flash.now[:success] = "Item was successfully added!"
+        redirect_to action: "index"
       else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.html { render :new }
+          format.json { render json: @item.errors, status: :unprocessable_entity }
+        end
       end
+      
+    else
+      flash.now[:danger] = "You are not logged in, login to add an item!"
+        respond_to do |format|
+            format.html { render :new }
+            format.json { render json: @item.errors, status: :unprocessable_entity }
+        end
     end
   end
 
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
+    
+    if logged_in?
+      if @item.user_id == current_user.id
+        if @item.update(item_params)
+          flash.now[:success] = "Item was successfully updated!"
+          redirect_to action: "index"
+        else
+          respond_to do |format|
+            format.html { render :edit }
+            format.json { render json: @item.errors, status: :unprocessable_entity }
+          end
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+        flash.now[:danger] = "This is not your item, it was not updated!"
+        respond_to do |format|
+            format.html { render :edit }
+            format.json { render json: @item.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash.now[:danger] = "You are not logged in, login to update an item that is yours!"
+        respond_to do |format|
+            format.html { render :edit }
+            format.json { render json: @item.errors, status: :unprocessable_entity }
+        end
     end
   end
 
