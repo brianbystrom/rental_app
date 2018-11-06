@@ -45,5 +45,16 @@
   <%= @item.status %>
 </p>
 
+
+
+
+<% @item.images.each do |image| %>
+  <% if image.variable? %>
+    <%= image_tag image,:size => '260x180' %>
+  <% elsif image.previewable? %>
+    <%= image_tag image,:size => '260x180' %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
