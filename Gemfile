@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.12'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'rails-controller-testing'
+gem 'geocoder'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
