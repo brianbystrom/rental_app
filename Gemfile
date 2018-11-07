@@ -30,6 +30,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'rails-controller-testing'
 gem 'geocoder'
+gem 'jquery-slick-rails', '~> 1.5', '>= 1.5.9.1' 
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
