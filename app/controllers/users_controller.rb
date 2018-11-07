@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @ip_addr = request.env[‘REMOTE_ADDR’]
+    #@ip_addr = request.env[‘REMOTE_ADDR’]
   end
 
   # GET /users/new

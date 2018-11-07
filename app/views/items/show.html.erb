@@ -50,9 +50,9 @@
 
 <% @item.images.each do |image| %>
   <% if image.variable? %>
-    <%= image_tag image,:size => '260x180' %>
+    <%= image_tag image, :height => "10%", :width => "10%" %>
   <% elsif image.previewable? %>
-    <%= image_tag image,:size => '260x180' %>
+    <%= image_tag image, :height => "10%", :width => "10%" %>
   <% end %>
 <% end %>
 
