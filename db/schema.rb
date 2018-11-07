@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_233909) do
+ActiveRecord::Schema.define(version: 2018_11_06_235348) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_233909) do
     t.string "state"
     t.string "zip"
     t.float "latitude"
-    t.float "longitutde"
+    t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

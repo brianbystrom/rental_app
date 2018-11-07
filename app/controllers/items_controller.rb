@@ -10,6 +10,16 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @test = @item.rentals
+    
+    @status = "checked_in"
+    if @item.rentals.count > 0
+      @item.rentals.each do |rental|
+        if !rental.buyer_checkin_confirm || !rental.seller_checkin_confirm
+          @status = "checked_out"
+        end
+      end
+    end
   end
 
   # GET /items/new
