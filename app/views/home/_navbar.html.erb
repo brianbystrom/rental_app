@@ -3,25 +3,72 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+              <h4 class="text-white">Seach by name or location</h4>
+               <div class="active-pink-3 active-pink-4 mb-4">
+              <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </div>
+             <div class="active-pink-3 active-pink-4 mb-4">
+              <input class="form-control" type="text" placeholder="Location" aria-label="Search">
+            </div>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
               <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                <li><a href="#" class="text-white">Like on Facebook</a></li>
-                <li><a href="#" class="text-white">Email me</a></li>
+                <li><a data-toggle= "modal" data-target="#signupModal" class="text-white">Sign up</a></li>
+                <% if  !logged_in? %>
+                <li><a data-toggle= "modal" data-target="#loginModal" class="text-white">Login</a></li>
+                <% elsif logged_in? %>
+                <li><a href="#" class="text-white">username</a></li>
+                <li><%= link_to "Logout", logout_path, method: :delete, :class => "text-white" %> </a></li>
+                <%end%>
               </ul>
             </div>
           </div>
         </div>
       </div>
+      
+      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Log in</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <%= render 'sessions/form' %>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sign up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <%= render 'users/signup', user: @user%>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      
+      
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
+          <a href="/" class="navbar-brand d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <strong>Album</strong>
+            <strong>Rent App</strong>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

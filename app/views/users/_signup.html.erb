@@ -1,0 +1,56 @@
+ <%= form_with(model: user, local: true) do |form| %>
+ 
+ <div class="field">
+    <%= form.label :fname %>
+    <%= form.text_field :fname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lname %>
+    <%= form.text_field :lname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.text_field :password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation %>
+    <%= form.text_field :password_confirmation %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :street %>
+    <%= form.text_field :street %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :zip %>
+    <%= form.text_field :zip %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<%end%>
