@@ -30,5 +30,6 @@ end
                     tag: "tag1, tag2",
                     price: "#{n}",
                     brand: "Brand #{n}",
+                    description: "This is a description of item #{n}.",
                     model: "Model #{n}")
 end
