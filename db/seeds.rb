@@ -20,7 +20,8 @@
                 street:  "9201 University City Blvd",
                 city:    "Charlotte",
                 state:   "NC",
-                zip:     "28223")
+                zip:     "28223",
+                phone:   "555-555-5555")
 end
 
 10.times do |n|

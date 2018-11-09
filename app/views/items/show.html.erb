@@ -1,6 +1,6 @@
 <%= render 'home/navbar' %>
 <p id="notice"><%= notice %></p>
-
+<%= check_status(@item) %>
 <p>
   <strong>User:</strong>
   <%= @item.user_id %>
