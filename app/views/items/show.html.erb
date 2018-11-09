@@ -47,13 +47,16 @@
 
 <%= @status %>
 
-
-<% @item.images.each do |image| %>
-  <% if image.variable? %>
-    <%= image_tag image, :height => "10%", :width => "10%" %>
-  <% elsif image.previewable? %>
-    <%= image_tag image, :height => "10%", :width => "10%" %>
+<% if @item.images.count > 0 %>
+  <% @item.images.each do |image| %>
+    <% if image.variable? %>
+      <%= image_tag image, :height => "10%", :width => "10%" %>
+    <% elsif image.previewable? %>
+      <%= image_tag image, :height => "10%", :width => "10%" %>
+    <% end %>
   <% end %>
+<% else %>
+  <%= image_tag("placeholder.png", :height => "10%", :width => "10%") %>
 <% end %>
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
