@@ -10,7 +10,12 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @test = @item.rentals
+    @userid = @item.user_id
+    @user = User.find(@userid)
+    @latitude = @user.latitude
+    @longitude = @user.longitude
+    @city = @user.city
+    @state = @user.state
     
     @status = "checked_in"
     if @item.rentals.count > 0
