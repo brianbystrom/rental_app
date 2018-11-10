@@ -1,8 +1,123 @@
-<% if logged_in? %>
-  <%= current_user.id %>
-<% else %>
-  NOpe
-<% end %>
+<%= render 'home/navbar' %>
+
+
+  <div class="jumbotron p-3 p-md-5 text-white rounded bg-info nav-buffer">
+    
+  </div>
+  
+  <div class="container bg-light">
+    <div class="row spacer-20 bg-light"></div>
+    <div class="row">
+      <div class="col bg-light">
+          <%= image_tag("default_avatar.jpg", :class => "profile-picture mx-auto d-block") %>
+      </div>
+      <div class="col bg-light nav-buffer text-center">
+        <span class="profile-user-name mt-3">Brian Bystrom</span></br>
+          <%= fa_icon('star') %>
+          <%= fa_icon('star') %>
+          <%= fa_icon('star') %>
+          <%= fa_icon('star') %>
+          <%= fa_icon('star') %> (29)</br>
+        <strong>Joined:</strong> September 2018</br>
+        <strong>Location:</strong> Charlotte, NC</br>
+        <div class="verified-container d-flex justify-content-center mt-3">
+          <div class="verified-item text-center mx-auto float-left">
+            <%= fa_icon('facebook-square 3x') %>Facebook Verified
+          </div>
+          <div class="verified-item text-center mx-auto float-left">
+            <%= fa_icon('twitter-square 3x') %>Twitter Verified
+          </div>
+          <div class="verified-item text-center mx-auto float-left">
+            <%= fa_icon('envelope 3x') %>Email Verified
+          </div>
+          <div class="verified-item text-center mx-auto float-left">
+            <%= fa_icon('money 3x') %>Verified for Payments
+          </div>
+        </div>
+        
+      </div>   
+      <div class="col-md-6 bg-light nav-buffer">
+        <%= image_tag("map_placeholder.png", :class => "mx-auto d-block profile-map") %>
+      </div> 
+    </div>
+    <div class="row spacer-20 bg-light"></div>
+    <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Your Items</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Rental History</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Current Rentals</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="row">
+          <div class="alert alert-info col-12" role="alert">
+            Below are the current items you have in your store.
+          </div>
+        </div>
+        <div class="row">
+            <% @user.items.each do |item| %>
+              <% puts item %>
+              <%= render 'home/item_card', item: item %>
+            <% end %>
+
+          </div>
+      </div>
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <table class="table table-striped">
+  <thead class="thead-grey">
+    <tr>
+      <th scope="col">Item Name</th>
+      <th scope="col">Seller</th>
+      <th scope="col">Status</th>
+      <th scope="col">Rental Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">iPhone X</th>
+      <td>username1</td>
+      <td>Checked-In</td>
+      <td>11/8/2018</td>
+    </tr>
+    <tr>
+      <th scope="row">40" Samsung TV</th>
+      <td>username2</td>
+      <td>Pending Checkout</td>
+      <td>11/9/2018</td>
+    </tr>
+    <tr>
+      <th scope="row">Razer Huntsman Pro</th>
+      <td>username1</td>
+      <td>Checked-In</td>
+      <td>7/5/2018</td>
+    </tr>
+  </tbody>
+</table>
+
+      </div>
+      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+        <div class="row">
+          <div class="alert alert-info col-12" role="alert">
+            Below are the items you currently have checked out and are renting from other users.
+          </div>
+        </div>
+        <div class="row">
+            <% @user.items.each do |item| %>
+              <% puts item %>
+              <%= render 'home/item_card', item: item %>
+            <% end %>
+
+          </div>
+      </div>
+    </div>
+    <div class="row spacer-20 bg-light"></div>
+  </div>
+
 
 <p id="notice"><%= notice %></p>
 

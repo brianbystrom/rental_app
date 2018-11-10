@@ -30,6 +30,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'rails-controller-testing'
 gem 'geocoder'
+gem 'font-awesome-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

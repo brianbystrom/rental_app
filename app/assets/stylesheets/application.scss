@@ -13,6 +13,11 @@
  */
 
 @import 'bootstrap';
+@import "font-awesome";
+
+.saboxplugin-socials .fa {
+    font-family: FontAwesome;
+}
 
 :root {
   --jumbotron-padding-y: 3rem;
@@ -50,4 +55,92 @@ footer {
 
 footer p {
   margin-bottom: .25rem;
+}
+
+.nav-buffer {
+  height: 100px;
+}
+
+.item-image-jumbotron {
+  height: 400px;
+}
+
+.profile-picture {
+  height: 200;
+  width: 200px;
+}
+
+.profile-picture-item {
+  height: 75px;
+  width: 75px;
+}
+
+.profile-user-name {
+  font-size: 24px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.verified-item {
+  width: 50px;
+  font-size: 10px;
+}
+
+.profile-map {
+  width: 450px;
+  height: 200px;
+}
+
+.spacer-20 {
+  height: 20px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+a {
+    color: #17a2b8;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+.thead-grey {
+  background-color: #343a40;
+  color: white;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+	background-color: white;
+}
+
+.item-option {
+  width: 125px;
+}
+
+.item-option-container {
+  float: none;
+}
+
+.price-icon {
+  float: left;
+}
+
+.item-price {
+  font-size: 28px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.item-name {
+  font-size: 28px;
+  font-weight: bolder;
+}
+
+.item-image {
+  height: 125%;
+  padding-bottom: 50px;
 }
