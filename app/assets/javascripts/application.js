@@ -14,3 +14,12 @@
 //= require popper
 //= require bootstrap
 //= require_tree .
+
+$(document).ready(function() {
+   $('.rating input').change(function () {
+      var $radio = $(this);
+      $('.rating .selected').removeClass('selected');
+      $radio.closest('label').addClass('selected');
+    }); 
+})
+

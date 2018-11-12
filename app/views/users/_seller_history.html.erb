@@ -19,11 +19,7 @@
                   <td><%= rental.rental_end_date.strftime("%B %d, %Y") %></td>
                   <td><%= number_to_currency(rental.total_price) %></td>
                   <td>
-                      <%= fa_icon('star') %>
-                      <%= fa_icon('star') %>
-                      <%= fa_icon('star') %>
-                      <%= fa_icon('star') %>
-                      <%= fa_icon('star') %>
+                      <%= render 'rating' %>
                   </td>
                 </tr>
             <% end %>

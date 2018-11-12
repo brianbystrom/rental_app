@@ -17,7 +17,7 @@
             </li>
             
             <% elsif logged_in? %>
-            <li><a href="users/<%= current_user.id %>" class="nav-link"><%= current_user.username %></a></li>
+            <li><a href="/users/<%= current_user.id %>" class="nav-link"><%= current_user.username %></a></li>
             <li class="nav-item">
               <%= link_to "Logout", logout_path, method: :delete, :class => "nav-link" %> </a>
             </li>
