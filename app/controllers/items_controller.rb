@@ -12,7 +12,8 @@ class ItemsController < ApplicationController
   def show
     
     @tags = @item.tag.split(',')
-    
+    @user_location = request.location.ip
+    @distance = @item.user.distance_to(@user_location)
     @similar_items = Item.where("tag like ?", "%#{@tags[0]}%").where.not(user_id: @item.user_id)
     
     
