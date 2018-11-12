@@ -130,7 +130,7 @@ a {
 }
 
 .item-price {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bolder;
   text-align: center;
 }
@@ -143,4 +143,18 @@ a {
 .item-image {
   height: 125%;
   padding-bottom: 50px;
+}
+
+.card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 4;
+  }
+}
+
+.item-image-blur {
+  filter: blur(5px);
+  transform: scale(2);
 }

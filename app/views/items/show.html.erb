@@ -1,276 +1,53 @@
+<%= stylesheet_link_tag "items", media: "all" %>
+
 <%= render 'home/navbar' %>
 
 
-  <div class="jumbotron p-3 p-md-5 text-white rounded bg-info nav-buffer">
+  <div class="p-3 p-md-5 text-white  bg-info nav-buffer">
     
   </div>
   
-  <div class="jumbotron p-3 p-md-5 text-white rounded bg-white item-image-jumbotron">
-    <%= image_tag("iphone.png", class: "item-image mx-auto d-block") %>
+  <div class="p-3 p-md-5 text-white bg-dark item-image-jumbotron">
+    <% if @item.images.count > 0 %>
+        <% if @item.images[0].variable? %>
+          <%= image_tag @item.images[0], class: "item-image mx-auto d-block big-item-image" %>
+        <% elsif @item.images[0].previewable? %>
+          <%= image_tag @item.images[0], class: "item-image mx-auto d-block big-item-image" %>
+        <% end %>
+      <% elsif @item.image_url %>
+        <%= image_tag(@item.image_url, class: "item-image mx-auto d-block big-item-image") %>
+      <% else %>
+        <%= image_tag("items/placeholder.svg", class: "item-image mx-auto d-block big-item-image") %>
+      <% end %>
   </div>
-  <div class="container bg-light">
-    <div class="row spacer-20 bg-light"></div>
-    <div class="row">
-      <div class="col-7 bg-light">
-        <div class="row">
-          <div class="col-4">
-            
-            <div class="price-icon"><%= fa_icon('tag 2x') %><span class="item-price"> $20/day</span></div>
-          </div>
-          <div class="col-8">
-            <span class="item-name">Item Name</span>
-          </div>
-        </div>
-        <div class="row">
-          <span class="ml-2"><strong>Location: </strong>&nbspCharlotte, NC &nbsp<%= fa_icon("map-marker") %>&nbsp Local pickup (32 miles away)</span>
-          
-        </div>
-        <hr>
-        <div class="row">
-          <span class="ml-2 mr-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            
-          </span>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="tag-container">
-            <button type="button" class="btn btn-outline-info item-option ml-2"><%= fa_icon("bookmark") %> Bookmark</button>
-            <button type="button" class="btn btn-outline-info item-option ml-2"><%= fa_icon("share-square-o") %> Share</button>
-            <button type="button" class="btn btn-outline-info item-option ml-2"><%= fa_icon("flag") %> Report</button>
-          </div>
-        </div>
-        
-        <div class="row mt-3">
-          <div class="tag-container">
-            <button type="button" class="btn btn-info ml-2">Tag 1</button>
-            <button type="button" class="btn btn-info ml-2">Tag 2</button>
-            <button type="button" class="btn btn-info ml-2">Tag 3</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-5 bg-light">
-        <div class="row mt-2 mb-2">
-          <div class="col-5">
-            <%= image_tag("default_avatar.jpg", :class => "profile-picture-item float-right d-block") %>
-          </div>
-          <div class="col-7 mt-2">
-            <span class="profile-user-name">Brian Bystrom</span></br>
-            <%= fa_icon('star') %>
-            <%= fa_icon('star') %>
-            <%= fa_icon('star') %>
-            <%= fa_icon('star') %>
-            <%= fa_icon('star') %> (29)</br>
-          </div>
-        </div>
-        <div class="row">
-          <div class="item-option-container ml-auto mr-auto">
-            <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('exchange') %>  Rent</button>
-            <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('comment') %>  Contact</button>
-            <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('bookmark') %>  Bookmark</button>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <%= image_tag("map_placeholder.png", :class => "mx-auto d-block profile-map") %>
-        </div> 
-      </div>
-    </div>
+  <div class="album py-5 bg-light">
+  <%= render 'item_info', item: @item, tags: @tags %>
     <hr>
+    <% if @similar_items.count > 0 %>
     <div class="row mt-3">
       <span class="item-name ml-3">Similar Items</span></br>
     </div>
     
+      <div class="card-group mt-3">
+        <% @similar_items.limit(4).each do |item| %>
+          <%= render 'item_card', item: item %>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <% if @item.user.items.where.not(id: @item.id).count > 0 %>
     <div class="row mt-3">
-      <div class="col-md-3">
-        <div class="card mb-3 shadow-sm">
-          <%= image_tag("placeholder.svg", class: "card-img-top") %>
-          <div class="card-body">
-              <h2>Item 1</h2>
-            <p class="card-text">Brand - Model</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                  <%= button_to "View", {:controller => :items, :action => 'show', :id => 1 }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-              </div>
-              <small class="text-muted">$20</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card mb-3 shadow-sm">
-          <%= image_tag("placeholder.svg", class: "card-img-top") %>
-          <div class="card-body">
-              <h2>Item 1</h2>
-            <p class="card-text">Brand - Model</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                  <%= button_to "View", {:controller => :items, :action => 'show', :id => 1 }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-              </div>
-              <small class="text-muted">$20</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card mb-3 shadow-sm">
-          <%= image_tag("placeholder.svg", class: "card-img-top") %>
-          <div class="card-body">
-              <h2>Item 1</h2>
-            <p class="card-text">Brand - Model</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                  <%= button_to "View", {:controller => :items, :action => 'show', :id => 1 }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-              </div>
-              <small class="text-muted">$20</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card mb-3 shadow-sm">
-          <%= image_tag("placeholder.svg", class: "card-img-top") %>
-          <div class="card-body">
-              <h2>Item 1</h2>
-            <p class="card-text">Brand - Model</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                  <%= button_to "View", {:controller => :items, :action => 'show', :id => 1 }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-              </div>
-              <small class="text-muted">$20</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <span class="item-name ml-3">Brian's Other Items</span></br>
+      <span class="item-name ml-3"><%= @item.user.fname %>'s Other Items</span></br>
     </div>
     
-    <div class="row mt-3">
-      <div class="col-md-3">
-        <div class="card mb-3 shadow-sm">
-          <%= image_tag("placeholder.svg", class: "card-img-top") %>
-          <div class="card-body">
-              <h2>Item 1</h2>
-            <p class="card-text">Brand - Model</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                  <%= button_to "View", {:controller => :items, :action => 'show', :id => 1 }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-              </div>
-              <small class="text-muted">$20</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card mb-3 shadow-sm">
-          <%= image_tag("placeholder.svg", class: "card-img-top") %>
-          <div class="card-body">
-              <h2>Item 1</h2>
-            <p class="card-text">Brand - Model</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                  <%= button_to "View", {:controller => :items, :action => 'show', :id => 1 }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-              </div>
-              <small class="text-muted">$20</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card mb-3 shadow-sm">
-          <%= image_tag("placeholder.svg", class: "card-img-top") %>
-          <div class="card-body">
-              <h2>Item 1</h2>
-            <p class="card-text">Brand - Model</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                  <%= button_to "View", {:controller => :items, :action => 'show', :id => 1 }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-              </div>
-              <small class="text-muted">$20</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card mb-3 shadow-sm">
-          <%= image_tag("placeholder.svg", class: "card-img-top") %>
-          <div class="card-body">
-              <h2>Item 1</h2>
-            <p class="card-text">Brand - Model</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                  <%= button_to "View", {:controller => :items, :action => 'show', :id => 1 }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-              </div>
-              <small class="text-muted">$20</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="card-group mt-3">
+      
+      <% @item.user.items.where.not(id: @item.id).limit(4).each do |item| %>
+        <%= render 'item_card', item: item %>
+      <% end %>
+    </div> 
+    <% end %>
     <div class="row spacer-20 bg-light"></div>
   </div>
-  
-<p id="notice"><%= notice %></p>
-<%= check_status(@item) %>
-<p>
-  <strong>User:</strong>
-  <%= @item.user_id %>
-</p>
-
-<p>
-  <strong>Serial no:</strong>
-  <%= @item.serial_no %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
-
-<p>
-  <strong>Tag:</strong>
-  <%= @item.tag %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @item.location %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @item.price %>
-</p>
-
-<p>
-  <strong>Brand:</strong>
-  <%= @item.brand %>
-</p>
-
-<p>
-  <strong>Model:</strong>
-  <%= @item.model %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @item.status %>
-</p>
-
-<%= @status %>
-
-<% if @item.images.count > 0 %>
-  <% @item.images.each do |image| %>
-    <% if image.variable? %>
-      <%= image_tag image, :height => "10%", :width => "10%" %>
-    <% elsif image.previewable? %>
-      <%= image_tag image, :height => "10%", :width => "10%" %>
-    <% end %>
-  <% end %>
-<% else %>
-  <%= image_tag("placeholder.png", :height => "10%", :width => "10%") %>
-<% end %>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+</div>
+<%= render 'home/footer' %>

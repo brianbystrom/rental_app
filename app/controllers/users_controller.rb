@@ -11,6 +11,14 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @rentals = Rental.where(user_id: params[:id]).where(buyer_checkin_confirm: false).or(Rental.where(seller_checkin_confirm: false))
+    @rental_buyer_history = Rental.where(user_id: params[:id]).where(buyer_checkin_confirm: true).where(seller_checkin_confirm: true)
+    @rental_seller_history = Rental.where(item_id: @user.items).where(buyer_checkin_confirm: true).where(seller_checkin_confirm: true)
+    #@rental_history = @rental_buyer_history + @rental_seller_history
+    puts "BUYER HISTORY: " + @rental_buyer_history.count.to_s
+    puts @rental_buyer_history
+    puts "SELLER HISTORY: " + @rental_seller_history.count.to_s
+    puts @rental_seller_history
     #@ip_addr = request.env[‘REMOTE_ADDR’]
   end
 

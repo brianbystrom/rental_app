@@ -1,0 +1,38 @@
+<table class="table table-striped">
+    <thead class="thead-grey text-center">
+        <tr>
+          <th scope="col">Item Name</th>
+          <th scope="col">Seller</th>
+          <th scope="col">Rental Start Date</th>
+          <th scope="col">Rental End Date</th>
+          <th scope="col">Price</th>
+          <th scope="col">Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if buyer_history.count > 0 %>
+            <% buyer_history.each do |rental| %>
+                <tr class="text-center">
+                  <th scope="row"><%= rental.item.name %></th>
+                  <td><%= rental.user.username %></td>
+                  <td><%= rental.rental_start_date.strftime("%B %d, %Y") %></td>
+                  <td><%= rental.rental_end_date.strftime("%B %d, %Y") %></td>
+                  <td><%= number_to_currency(rental.total_price) %></td>
+                  <td>
+                      <%= fa_icon('star') %>
+                      <%= fa_icon('star') %>
+                      <%= fa_icon('star') %>
+                      <%= fa_icon('star') %>
+                      <%= fa_icon('star') %>
+                  </td>
+                </tr>
+            <% end %>
+        <% else %>
+            <tr class="text-center">
+                <td colspan="6">
+                    You do not have any rentals to show in your history.
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

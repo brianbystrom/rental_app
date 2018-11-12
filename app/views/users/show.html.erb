@@ -1,163 +1,113 @@
+<%= stylesheet_link_tag "users", media: "all" %>
 <%= render 'home/navbar' %>
 
-
-  <div class="jumbotron p-3 p-md-5 text-white rounded bg-info nav-buffer">
+  <div class="p-3 p-md-5 text-white bg-info nav-buffer">
     
   </div>
-  
+  <div class="album py-3 bg-light">
   <div class="container bg-light">
     <div class="row spacer-20 bg-light"></div>
-    <div class="row">
-      <div class="col bg-light">
-          <%= image_tag("default_avatar.jpg", :class => "profile-picture mx-auto d-block") %>
-      </div>
-      <div class="col bg-light nav-buffer text-center">
-        <span class="profile-user-name mt-3">Brian Bystrom</span></br>
-          <%= fa_icon('star') %>
-          <%= fa_icon('star') %>
-          <%= fa_icon('star') %>
-          <%= fa_icon('star') %>
-          <%= fa_icon('star') %> (29)</br>
-        <strong>Joined:</strong> September 2018</br>
-        <strong>Location:</strong> Charlotte, NC</br>
-        <div class="verified-container d-flex justify-content-center mt-3">
-          <div class="verified-item text-center mx-auto float-left">
-            <%= fa_icon('facebook-square 3x') %>Facebook Verified
-          </div>
-          <div class="verified-item text-center mx-auto float-left">
-            <%= fa_icon('twitter-square 3x') %>Twitter Verified
-          </div>
-          <div class="verified-item text-center mx-auto float-left">
-            <%= fa_icon('envelope 3x') %>Email Verified
-          </div>
-          <div class="verified-item text-center mx-auto float-left">
-            <%= fa_icon('money 3x') %>Verified for Payments
-          </div>
-        </div>
-        
-      </div>   
-      <div class="col-md-6 bg-light nav-buffer">
-        <%= image_tag("map_placeholder.png", :class => "mx-auto d-block profile-map") %>
-      </div> 
-    </div>
+    <%= render 'user_card', user: @user %>
     <div class="row spacer-20 bg-light"></div>
+    <% if @user.id == current_user.id %>
+      <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-items-tab" data-toggle="pill" href="#pills-items" role="tab" aria-controls="pills-items" aria-selected="true">Your Items</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-history-tab" data-toggle="pill" href="#pills-history" role="tab" aria-controls="pills-history" aria-selected="false">Rental History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-sales-tab" data-toggle="pill" href="#pills-sales" role="tab" aria-controls="pills-sales" aria-selected="false">Seller History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-rentals-tab" data-toggle="pill" href="#pills-rentals" role="tab" aria-controls="pills-rentals" aria-selected="false">Current Rentals</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-items" role="tabpanel" aria-labelledby="pills-items-tab">
+          <div class="row">
+            <div class="alert alert-info col-12" role="alert">
+              Below are the current items you have in your store.
+            </div>
+          </div>
+          <% if @user.items.count > 0 %>
+            <div class="card-group mt-3">
+              <% @user.items.each do |item| %>
+                <%= render 'items/item_card', item: item %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="row">
+              <p class="ml-3">You have no items available for others to rent. Add one now!</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="tab-pane fade" id="pills-history" role="tabpanel" aria-labelledby="pills-history-tab">
+          <%= render 'buyer_history', buyer_history: @rental_buyer_history %>
+        
+  
+        </div>
+        <div class="tab-pane fade" id="pills-sales" role="tabpanel" aria-labelledby="pills-sales-tab">
+          <%= render 'seller_history', seller_history: @rental_seller_history %>
+        
+  
+        </div>
+        <div class="tab-pane fade" id="pills-rentals" role="tabpanel" aria-labelledby="pills-rentals-tab">
+          <div class="row">
+            <div class="alert alert-info col-12" role="alert">
+              Below are the items you currently have checked out and are renting from other users.
+            </div>
+          </div>
+          <% if @user.rentals.count > 0 %>
+            <div class="card-group mt-3">
+              <% @user.rentals.each do |rental| %>
+                <%= render 'items/item_card', item: rental.item %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="row">
+              <p class="ml-3">You currently don't have any items checked out from other users. Add one now!</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% else %>
     <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Your Items</a>
+        <a class="nav-link active" id="pills-items-tab" data-toggle="pill" href="#pills-items" role="tab" aria-controls="pills-items" aria-selected="true"><%= @user.fname %>'s Items</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Rental History</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Current Rentals</a>
-      </li>
+          <a class="nav-link" id="pills-reviews-tab" data-toggle="pill" href="#pills-reviews" role="tab" aria-controls="pills-reviews" aria-selected="false">User Reviews</a>
+        </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="tab-pane fade show active" id="pills-items" role="tabpanel" aria-labelledby="pills-items-tab">
         <div class="row">
           <div class="alert alert-info col-12" role="alert">
             Below are the current items you have in your store.
           </div>
         </div>
-        <div class="row">
+        <% if @user.items.count > 0 %>
+          <div class="card-group mt-3">
             <% @user.items.each do |item| %>
-              <% puts item %>
-              <%= render 'home/item_card', item: item %>
+              <%= render 'items/item_card', item: item %>
             <% end %>
-
           </div>
+        <% else %>
+          <div class="row">
+            <p class="ml-3">You have no items available for others to rent. Add one now!</p>
+          </div>
+        <% end %>
       </div>
-      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-        <table class="table table-striped">
-  <thead class="thead-grey">
-    <tr>
-      <th scope="col">Item Name</th>
-      <th scope="col">Seller</th>
-      <th scope="col">Status</th>
-      <th scope="col">Rental Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">iPhone X</th>
-      <td>username1</td>
-      <td>Checked-In</td>
-      <td>11/8/2018</td>
-    </tr>
-    <tr>
-      <th scope="row">40" Samsung TV</th>
-      <td>username2</td>
-      <td>Pending Checkout</td>
-      <td>11/9/2018</td>
-    </tr>
-    <tr>
-      <th scope="row">Razer Huntsman Pro</th>
-      <td>username1</td>
-      <td>Checked-In</td>
-      <td>7/5/2018</td>
-    </tr>
-  </tbody>
-</table>
-
-      </div>
-      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-        <div class="row">
-          <div class="alert alert-info col-12" role="alert">
-            Below are the items you currently have checked out and are renting from other users.
-          </div>
-        </div>
-        <div class="row">
-            <% @user.items.each do |item| %>
-              <% puts item %>
-              <%= render 'home/item_card', item: item %>
-            <% end %>
-
-          </div>
+      <div class="tab-pane fade" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
+        <p class="ml-3">Coming soon!</p>
       </div>
     </div>
-    <div class="row spacer-20 bg-light"></div>
-  </div>
-
-
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Fname:</strong>
-  <%= @user.fname %>
-</p>
-
-<p>
-  <strong>Lname:</strong>
-  <%= @user.lname %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @user.status %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @user.admin %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-<%= link_to "Log out", logout_path, method: :delete %>
-
-<%= debug(params) if Rails.env.development? %>
+  </div>  
+  <% end %>
+  <div class="row spacer-20 bg-light"></div>
+</div>
+</div>
+<%= render 'home/footer' %>

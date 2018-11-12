@@ -10,9 +10,21 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
-    @test = @item.rentals
+    
+    @tags = @item.tag.split(',')
+    
+    @similar_items = Item.where("tag like ?", "%#{@tags[0]}%").where.not(user_id: @item.user_id)
     
     
+    
+    @status = "checked_in"
+    if @item.rentals.count > 0
+      @item.rentals.each do |rental|
+        if !rental.buyer_checkin_confirm || !rental.seller_checkin_confirm
+          @status = "checked_out"
+        end
+      end
+    end
   end
 
   # GET /items/new

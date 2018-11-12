@@ -1,3 +1,23 @@
 // Place all the styles related to the Items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+a {
+    color: #212529;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+a:hover {
+    color: #212529;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}

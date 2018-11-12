@@ -1,14 +1,17 @@
 module ItemsHelper
     
-    def check_status(item)
+    def checked_in(item)
+        
+        status = true
+        
         if item.rentals.count > 0
             item.rentals.each do |rental|
                 if !rental.buyer_checkin_confirm || !rental.seller_checkin_confirm
-                    "checked_out"
+                    status = false
                 end
             end
         end
         
-        "checked_in"
+        status
     end 
 end

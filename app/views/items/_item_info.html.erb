@@ -1,0 +1,73 @@
+  <% if checked_in(@item)
+      @disabled = ""
+      @rent_btn_text = "Rent"
+    else
+      @disabled = "disabled"
+      @rent_btn_text = "Unavailable"
+  end %>
+  
+  <div class="container bg-light">
+    <div class="row spacer-20 bg-light"></div>
+    <div class="row">
+      <div class="col-7 bg-light">
+        <div class="row">
+          <div class="col">
+            <span class="item-name"><%= item.name %></span>
+            <span class="item-price text-info">(<%= number_to_currency(item.price) %>/day)</span>
+          </div>
+        </div>
+        <div class="row">
+          <span class="ml-3"><strong>Location: </strong>&nbsp<%= item.user.city %>, <%= item.user.state %> &nbsp<%= fa_icon("map-marker") %>&nbsp Local pickup (32 miles away)</span>
+        </div>
+        <hr>
+        <div class="row">
+          <span class="ml-3 mr-2">
+            <%= item.description %> 
+          </span>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="tag-container ml-2">
+            <button type="button" class="btn btn-outline-info item-option ml-2"><%= fa_icon("bookmark") %> Bookmark</button>
+            <button type="button" class="btn btn-outline-info item-option ml-2"><%= fa_icon("share-square-o") %> Share</button>
+            <button type="button" class="btn btn-outline-info item-option ml-2"><%= fa_icon("flag") %> Report</button>
+          </div>
+        </div>
+        
+        <div class="row mt-3">
+          <div class="tag-container ml-2">
+            <% @tags.each do |tag| %>
+              <button type="button" class="btn btn-info ml-2"><%= tag %></button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-5 bg-light">
+        <div class="row mt-2 mb-2">
+          <div class="col-5">
+            <%= image_tag("default_avatar.jpg", :class => "profile-picture-item float-right d-block") %>
+          </div>
+          <div class="col-7 mt-2">
+            <%= link_to :controller => :users, :action => 'show', :id => item.user.id do %>
+            <span class="profile-user-name"><%= item.user.fname %> <%= item.user.lname %></span>
+            <% end %>
+            </br>
+            <%= fa_icon('star') %>
+            <%= fa_icon('star') %>
+            <%= fa_icon('star') %>
+            <%= fa_icon('star') %>
+            <%= fa_icon('star') %> (29)</br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="item-option-container ml-auto mr-auto">
+            <button type="button" class="btn btn-info item-option ml-2 <%= @disabled %>"><%= fa_icon('exchange') %>  <%= @rent_btn_text %></button>
+            <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('comment') %>  Contact</button>
+            <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('bookmark') %>  Bookmark</button>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <%= image_tag("map_placeholder.png", :class => "mx-auto d-block profile-map") %>
+        </div> 
+      </div>
+    </div>

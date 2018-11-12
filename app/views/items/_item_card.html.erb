@@ -1,0 +1,25 @@
+
+  <div class="col-md-3">
+    <%= link_to :controller => :items, :action => 'show', :id => item.id do %>
+    <div class="card mb-3 shadow-sm">
+      <% if item.images.count > 0 %>
+        <% if item.images[0].variable? %>
+          <%= image_tag item.images[0], class: "card-img-top item-image-card" %>
+        <% elsif item.images[0].previewable? %>
+          <%= image_tag item.images[0], class: "card-img-top item-image-card" %>
+        <% end %>
+      <% elsif item.image_url %>
+        <%= image_tag(item.image_url, class: "card-img-top") %>
+      <% else %>
+        <%= image_tag("items/placeholder.svg", class: "card-img-top") %>
+      <% end %>
+      <div class="card-body">
+        <h4><%= truncate(item.name, :length => 15) %></h4>
+        <h4 class="text-info"><strong><%= number_to_currency(item.price) %></strong></h4>
+        <span class="card-info text-muted"><%= item.user.city %>, <%= item.user.state %></span>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+

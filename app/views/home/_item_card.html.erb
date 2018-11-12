@@ -1,16 +1,30 @@
-<div class="col-md-3">
+<%= link_to :controller => :items, :action => 'show', :id => item.id do %>
   <div class="card mb-3 shadow-sm">
-    <%= image_tag("placeholder.svg", class: "card-img-top") %>
+    <% if item.images.count > 0 %>
+      <% if item.images[0].variable? %>
+        <%= image_tag item.images[0], class: "card-img-top" %>
+      <% elsif item.images[0].previewable? %>
+        <%= image_tag item.images[0], class: "card-img-top" %>
+      <% end %>
+    <% elsif item.image_url %>
+      <%= image_tag(item.image_url, class: "card-img-top") %>
+    <% else %>
+      <%= image_tag("items/placeholder.svg", class: "card-img-top") %>
+    <% end %>
+    
     <div class="card-body">
-        <h4><%= item.name %></h4>
+        <h4><%= truncate(item.name, :length => 30) %></h4>
       <p class="card-text"><%= item.brand %> - <%= item.model %></p>
-      <p class="card-text"><%= item.description %></p>
+      <p class="card-text"><%= truncate(item.description, :length => 120) %></p>
       <div class="d-flex justify-content-between align-items-center">
-        <div class="btn-group">
-            <%= button_to "View", {:controller => :items, :action => 'show', :id => item.id }, :method => :get, :class => "btn btn-sm btn-outline-secondary" %>
-        </div>
-        <small class="text-muted">$<%= item.price %></small>
+        
       </div>
     </div>
+    <div class="card-footer">
+      <strong class="text-muted text-right"><%= item.user.city + ", " + item.user.state %></strong>
+      <span class="item-price text-info text-center">(<%= number_to_currency(item.price) %>/day)</span>
+    </div>
   </div>
-</div>
+  
+<% end %>
+

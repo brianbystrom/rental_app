@@ -1,0 +1,33 @@
+<div class="row">
+      <div class="col bg-light">
+          <%= image_tag("default_avatar.jpg", :class => "profile-picture mx-auto d-block") %>
+      </div>
+      <div class="col bg-light nav-buffer text-center">
+        <span class="profile-user-name mt-3"><%= user.fname + " " + user.lname %></span></br>
+          <%= fa_icon('star') %>
+          <%= fa_icon('star') %>
+          <%= fa_icon('star') %>
+          <%= fa_icon('star') %>
+          <%= fa_icon('star') %> (29)</br>
+        <strong>Joined:</strong> <%= user.created_at.strftime("%B %Y") %></br>
+        <strong>Location:</strong> <%= user.city + ", " + user.state %></br>
+        <div class="verified-container d-flex justify-content-center mt-3">
+          <div class="verified-item text-center mx-auto float-left">
+            <%= fa_icon('facebook-square 3x') %>Facebook Verified
+          </div>
+          <div class="verified-item text-center mx-auto float-left">
+            <%= fa_icon('twitter-square 3x') %>Twitter Verified
+          </div>
+          <div class="verified-item text-center mx-auto float-left">
+            <%= fa_icon('envelope 3x') %>Email Verified
+          </div>
+          <div class="verified-item text-center mx-auto float-left">
+            <%= fa_icon('money 3x') %>Verified for Payments
+          </div>
+        </div>
+        
+      </div>   
+      <div class="col-md-6 bg-light nav-buffer">
+        <%= image_tag("map_placeholder.png", :class => "mx-auto d-block profile-map") %>
+      </div> 
+    </div>
