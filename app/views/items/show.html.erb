@@ -42,7 +42,7 @@
     
     <div class="card-group mt-3">
       
-      <% @item.user.items.where.not(id: @item.id).limit(4).each do |item| %>
+      <% @user_other_items.limit(4).each do |item| %>
         <%= render 'item_card', item: item %>
       <% end %>
     </div> 
