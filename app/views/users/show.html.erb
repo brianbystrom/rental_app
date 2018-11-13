@@ -59,9 +59,9 @@
               Below are the items you currently have checked out and are renting from other users.
             </div>
           </div>
-          <% if @user.rentals.count > 0 %>
+          <% if @rentals.count > 0 %>
             <div class="card-group mt-3">
-              <% @user.rentals.each do |rental| %>
+              <% @rentals.each do |rental| %>
                 <%= render 'items/item_card', item: rental.item %>
               <% end %>
             </div>
