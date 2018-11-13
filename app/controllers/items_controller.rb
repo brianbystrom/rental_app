@@ -14,18 +14,8 @@ class ItemsController < ApplicationController
     @tags = @item.tag.split(',')
     @user_location = request.location.ip
     @distance = @item.user.distance_to(@user_location)
-    @similar_items = Item.where("tag like ?", "%#{@tags[0]}%").where.not(user_id: @item.user_id)
-    
-    
-    
-    @status = "checked_in"
-    if @item.rentals.count > 0
-      @item.rentals.each do |rental|
-        if !rental.buyer_checkin_confirm || !rental.seller_checkin_confirm
-          @status = "checked_out"
-        end
-      end
-    end
+    @similar_items = Item.where("tag like ?", "%#{@tags[0]}%").where.not(user_id: @item.user_id).where.not(:id => Rental.where(buyer_checkin_confirm: false).or(Rental.where(seller_checkin_confirm: false)))
+    @user_other_items = @item.user.items.where.not(id: @item.id).where.not(:id => Rental.where(buyer_checkin_confirm: false).or(Rental.where(seller_checkin_confirm: false)))
   end
 
   # GET /items/new

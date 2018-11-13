@@ -16,7 +16,13 @@
       <div class="card-body">
         <h4><%= truncate(item.name, :length => 15) %></h4>
         <h4 class="text-info"><strong><%= number_to_currency(item.price) %></strong></h4>
-        <span class="card-info text-muted"><%= item.user.city %>, <%= item.user.state %></span>
+        <span class="card-info text-muted"><%= item.user.city %>, <%= item.user.state %>
+          <% if !checked_in(item) %>
+            <span class="badge badge-info item-status-badge">Out</span>
+          <% end %>
+        </span>
+        
+        
       </div>
     </div>
     <% end %>
