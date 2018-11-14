@@ -14,4 +14,19 @@ module ItemsHelper
         
         status
     end 
+    
+    def pending(item)
+        
+        pending = false
+        
+        if item.rentals.count > 0
+            item.rentals.each do |rental|
+                if !rental.approval
+                    pending = true
+                end
+            end
+        end
+        
+        pending
+    end 
 end

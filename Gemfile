@@ -31,6 +31,7 @@ gem 'jquery-rails'
 gem 'rails-controller-testing'
 gem 'geocoder'
 gem 'font-awesome-rails'
+gem 'bootstrap-datepicker-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

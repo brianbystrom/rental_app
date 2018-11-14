@@ -62,14 +62,36 @@
         </div>
         <div class="row">
           <div class="item-option-container ml-auto mr-auto">
-            <button type="button" class="btn btn-info item-option ml-2 <%= @disabled %>"><%= fa_icon('exchange') %>  <%= @rent_btn_text %></button>
+            <button type="button" data-target="#RentModal" data-toggle="modal" class="btn btn-info item-option ml-2 <%= @disabled %>"><%= fa_icon('exchange') %>  <%= @rent_btn_text %></button>
             <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('comment') %>  Contact</button>
             <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('bookmark') %>  Bookmark</button>
           </div>
         </div>
         <div class="row mt-3">
-          <%= image_tag("http://maps.googleapis.com/maps/api/staticmap?center=#{item.user.latitude},#{item.user.longitude}&markers=#{item.user.latitude},#{item.user.longitude}&zoom=15&size=450x200&key=AIzaSyA_x25mqDphJPz0jrC21MWQCICDKqxTCL8", :class => "mx-auto d-block profile-map") %>
-          
+          <%= image_tag("http://maps.googleapis.com/maps/api/staticmap?center=#{item.user.latitude},#{item.user.longitude}&zoom=15&size=450x200&key=AIzaSyA_x25mqDphJPz0jrC21MWQCICDKqxTCL8", :class => "mx-auto d-block profile-map") %>
         </div> 
       </div>
     </div>
+    
+    <div class="modal fade bd-example-modal-lg" id = "RentModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rent Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="alert alert-info" role="alert">
+            Fill out the form below to submit a rent request for the item to the user.  Once submitted it will go into a pending status until approved by the user.
+          </div>
+          <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+<%= yield %>
+          <%= render 'items/rent_modal', rental: @rental, item: @item %>
+      </div>
+    </div>
+  </div>
+</div>

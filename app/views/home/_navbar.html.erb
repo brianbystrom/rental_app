@@ -43,6 +43,9 @@
         </button>
       </div>
       <div class="modal-body">
+          <div class="alert alert-info" role="alert">
+            Provide the email and password you signed up with.
+          </div>
           <%= render 'sessions/form', user: @user %>
       </div>
     </div>
@@ -59,7 +62,10 @@
         </button>
       </div>
       <div class="modal-body">
-          <%= render 'items/form_modal', item: @item %>
+          <div class="alert alert-info" role="alert">
+            Fill out the form below to post an item to be rented by other users.
+          </div>
+          <%= render 'items/form_modal' %>
       </div>
     </div>
   </div>
@@ -75,7 +81,10 @@
         </button>
       </div>
       <div class="modal-body">
-          <%= render 'users/signup', user: @user%>
+        <div class="alert alert-info" role="alert">
+          Fill out the form below to create an account.
+        </div>
+        <%= render 'users/signup', user: @user%>
       </div>
     </div>
   </div>

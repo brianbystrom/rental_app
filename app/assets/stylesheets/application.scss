@@ -15,6 +15,7 @@
 @import 'bootstrap';
 @import "font-awesome";
 
+
 .saboxplugin-socials .fa {
     font-family: FontAwesome;
 }
@@ -255,4 +256,15 @@ a {
 
 .form-group label {
   font-weight: bolder;
+}
+
+.datepicker {
+	.form-control {
+		background: #fff;
+	}
+}
+
+.rent-checkbox {
+  display: inline;
+  float: left;
 }

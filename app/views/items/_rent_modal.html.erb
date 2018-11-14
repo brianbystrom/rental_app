@@ -1,54 +1,54 @@
-<%= form_with model: item, url: items_path do |form| %>
+<%= form_with model: rental, url: rentals_path(item_id: @item.id), :remote => true do |form| %>
 
 <div class="form-group row">
-    <%= form.label "Name:", :class => "col-2 col-form-label" %>
-    <div class="col-10">
-      <%= form.text_field :name, :class => "form-control" %>
+    <%= form.label "Rental Start Date:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+      <%= form.date_select :rental_start_date, :order => [ :month, :day, :year ], :use_two_digit_numbers => true, :class => "form-control" %>
     </div>
 </div>
 <div class="form-group row">
-    <%= form.label "Description:", :class => "col-2 col-form-label" %>
-    <div class="col-10">
-      <%= form.text_field :description, :class => "form-control" %>
+    <%= form.label "Rental End Date:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+      <%= form.date_select :rental_end_date, :order => [ :month, :day, :year ], :use_two_digit_numbers => true, :class => "form-control" %>
     </div>
 </div>
 <div class="form-group row">
-    <%= form.label "Serial #:", :class => "col-2 col-form-label" %>
-    <div class="col-10">
-      <%= form.text_field :serial_no, :class => "form-control" %>
+    <%= form.label "$/Day", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+      $<span id="price-per-day"><%= @item.price %></span>
     </div>
 </div>
 <div class="form-group row">
-    <%= form.label "Tags:", :class => "col-2 col-form-label" %>
-    <div class="col-10">
-      <%= form.text_field :tag, :class => "form-control" %>
+  <%= form.label "Total Price:", :class => "col-4 col-form-label" %>
+  <div class="col-8">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="text" class="form-control" id="total-price" aria-label="Amount (to the nearest dollar)">
+      </div>
+  </div>
+</div>
+<div class="form-group row">
+    <%= form.label "Need Assistance?:", :class => "col-4 col-form-label" %>
+    <div class="col-1">
+      <%= form.check_box :assistance, :class => "form-control" %>
+    </div>
+    <div class="col-7">
+      <select class="form-control" id="assistance_reason" name="assistance_reason">
+        <option>Select reason for assistance</option>
+        <option>Setup</option>
+        <option>Usage</option>
+      </select>
     </div>
 </div>
 <div class="form-group row">
-    <%= form.label "Price:", :class => "col-2 col-form-label" %>
-    <div class="col-10">
-      <%= form.text_field :price, :class => "form-control" %>
-    </div>
-</div>
-<div class="form-group row">
-    <%= form.label "Brand:", :class => "col-2 col-form-label" %>
-    <div class="col-10">
-      <%= form.text_field :brand, :class => "form-control" %>
-    </div>
-</div>
-<div class="form-group row">
-    <%= form.label "Model:", :class => "col-2 col-form-label" %>
-    <div class="col-10">
-      <%= form.text_field :model, :class => "form-control" %>
-    </div>
-</div>
-<div class="form-group row">
-    <%= form.label "Images:", :class => "col-2 col-form-label" %>
-    <div class="col-10">
-      <%= form.file_field :images, multiple: true %>
+    <%= form.label "Comment:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+      <%= form.text_area :comment, :class => "form-control" %>
     </div>
 </div>
 <div class="actions">
-    <%= form.submit "Post Item", :class => "btn btn-info post-item-btn" %>
+    <%= form.submit "Rent Item", :class => "btn btn-info post-item-btn" %>
 </div>
 <% end %>

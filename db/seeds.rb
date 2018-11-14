@@ -14,10 +14,10 @@ User.create!(   fname:                  "Brian",
                 password_confirmation:  "password",
                 status:                 true,
                 admin:                  false,
-                street:                 "9201 University City Blvd",
+                street:                 "1120 Garrison Rd.",
                 city:                   "Charlotte",
                 state:                  "NC",
-                zip:                    "28223",
+                zip:                    "28262",
                 phone:                  "555-555-5555")
                 
 User.create!(   fname:                  "Katelyn",

@@ -1,56 +1,66 @@
- <%= form_with(model: user, local: true) do |form| %>
+ <%= form_with(model: user, url: users_path, remote: true) do |form| %>
  
- <div class="field">
-    <%= form.label :fname %>
-    <%= form.text_field :fname %>
+  <div class="form-group row">
+    <%= form.label "First Name:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.text_field :fname, :class => "form-control", :required => true %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :lname %>
-    <%= form.text_field :lname %>
+  <div class="form-group row">
+    <%= form.label "Last Name:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.text_field :lname, :class => "form-control", :required => true %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+  <div class="form-group row">
+    <%= form.label "Email:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.email_field :email, :class => "form-control", :required => true %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
+  <div class="form-group row">
+    <%= form.label "Username:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.text_field :username, :class => "form-control", :required => true %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password %>
+  <div class="form-group row">
+    <%= form.label "Password:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.password_field :password, :class => "form-control", :required => true %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.text_field :password_confirmation %>
+  <div class="form-group row">
+    <%= form.label "Password Confirm:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.password_field :password_confirmation, :class => "form-control", :required => true %>
+    </div>
   </div>
-  
-  <div class="field">
-    <%= form.label :street %>
-    <%= form.text_field :street %>
+  <div class="form-group row">
+    <%= form.label "Street:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.text_field :street, :class => "form-control", :required => true %>
+    </div>
   </div>
-  
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city %>
+  <div class="form-group row">
+    <%= form.label "City:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.text_field :city, :class => "form-control", :required => true %>
+    </div>
   </div>
-  
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
+  <div class="form-group row">
+    <%= form.label "State:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.text_field :state, :class => "form-control", :required => true %>
+    </div>
   </div>
-  
-  <div class="field">
-    <%= form.label :zip %>
-    <%= form.text_field :zip %>
+  <div class="form-group row">
+    <%= form.label "Zip:", :class => "col-4 col-form-label" %>
+    <div class="col-8">
+          <%= form.text_field :zip, :class => "form-control", :required => true %>
+    </div>
   </div>
-
   <div class="actions">
-    <%= form.submit %>
+      <%= form.submit "Sign Up", :class => "btn btn-info post-item-btn" %>
   </div>
 <%end%>
