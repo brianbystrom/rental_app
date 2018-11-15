@@ -24,3 +24,4 @@ test:
 production:
   <<: *default
   database: rental_app
+
