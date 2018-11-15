@@ -22,7 +22,7 @@ $(document).ready(function() {
       $radio.closest('label').addClass('selected');
     }); 
     
-    $( "#_rental_end_date_3i, #_rental_end_date_2i " ).change(function() {
+    $( "#_rental_end_date_3i, #_rental_end_date_2i, #_rental_end_date_1i, #_rental_start_date_3i, #_rental_start_date_2i, #_rental_start_date_1i " ).change(function() {
          var price_per_day = parseFloat($("#price-per-day").text());
          var start_month = $("#_rental_start_date_2i").val();
          var start_day = $("#_rental_start_date_3i").val();
@@ -34,7 +34,7 @@ $(document).ready(function() {
          var end_date = new Date(end_month + "/" + end_day + "/" + end_year);
          var diff = new Date(end_date - start_date);
          var days = diff/1000/60/60/24;
-         var total_price = days * price_per_day
+         var total_price = (days + 1) * price_per_day
          
          if(total_price < 0) {
             total_price = "Enter a end date after the start date.";

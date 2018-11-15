@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
       
       if @item.save
         flash.now[:success] = "Item was successfully added!"
-        redirect_to action: "index"
+        redirect_to current_user
       else
         respond_to do |format|
           format.html { render :new }

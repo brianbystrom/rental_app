@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @rentals = @user.rentals.where(buyer_checkin_confirm: false).where(seller_checkin_confirm: false)
+    @pending_items = Rental.where(item_id: @user.items).where(approval: false)
     puts "RENTALS: " + @rentals.count.to_s
     @rental_buyer_history = Rental.where(user_id: params[:id]).where(buyer_checkin_confirm: true).where(seller_checkin_confirm: true)
     @rental_seller_history = Rental.where(item_id: @user.items).where(buyer_checkin_confirm: true).where(seller_checkin_confirm: true)
@@ -74,6 +75,8 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

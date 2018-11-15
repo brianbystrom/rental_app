@@ -1,0 +1,45 @@
+<table class="table table-striped">
+    <thead class="thead-grey text-center">
+        <tr>
+          <th scope="col">Item Name</th>
+          <th scope="col">Buyer</th>
+          <th scope="col">Rental Start Date</th>
+          <th scope="col">Rental End Date</th>
+          <th scope="col">Price</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Assist</th>
+          <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if pending_items.count > 0 %>
+            <% pending_items.each do |rental| %>
+                <tr class="text-center">
+                  <th scope="row"><%= rental.item.name %></th>
+                  <td><%= rental.user.username %></td>
+                  <td><%= rental.rental_start_date.strftime("%B %d, %Y") %></td>
+                  <td><%= rental.rental_end_date.strftime("%B %d, %Y") %></td>
+                  <td><%= number_to_currency(rental.total_price) %></td>
+                  <td>
+                      <%= truncate(rental.comment, :length => 30) %>
+                  </td>
+                  <td><%= rental.assistance_reason %></td>
+                  <td>
+                      <div class="btn-group">
+                      <%= button_to rentals_approve_rental_path(:rental_id => rental.id), remote: true, :class => "btn btn-info ml-2 d-inline", method: :post do %>
+                          <%= fa_icon("check") %>
+                      <% end %>
+                      <button type="button" class="btn btn-info ml-2 d-inline"><%= fa_icon('comment') %></button>
+                      </div>
+                  </td>
+                </tr>
+            <% end %>
+        <% else %>
+            <tr class="text-center">
+                <td colspan="6">
+                    You do not have any rentals to show in your history.
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

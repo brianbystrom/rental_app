@@ -37,19 +37,21 @@ class RentalsController < ApplicationController
       
       
       @rental_days = (@rental.rental_end_date - @rental.rental_start_date).to_i/86400
-      @rental.total_price = @rental_days * @item.price
+      @rental.total_price = (@rental_days + 1) * @item.price
       @rental.approval = false
+      
+      puts "RENTAL INFORMATION"
+      puts @rental_days
+      puts @item.price
 
-      respond_to do |format|
+
         if @rental.save
-          puts
-          format.html { redirect_to @rental, notice: 'Rental was successfully created.' }
-          format.json { render :show, status: :created, location: @rental }
+          #format.html { redirect_to @rental, notice: 'Rental was successfully created.' }
+          redirect_to current_user
         else
           format.html { render :new }
           format.json { render json: @rental.errors, status: :unprocessable_entity }
         end
-      end
     else
       respond_to do |format|
         flash.now[:danger] = "Please sign in to rent an item."
@@ -81,6 +83,28 @@ class RentalsController < ApplicationController
       format.html { redirect_to rentals_url, notice: 'Rental was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def approve_rental
+    puts "HELLO"
+    @rental_id = params[:rental_id]
+    puts @rental_id
+    
+    @rental = Rental.find(params[:rental_id])
+    
+    if current_user
+      if current_user.id == @rental.item.user_id
+        @rental.approval = true
+        @rental.save
+      else
+        puts "FAIL1"
+      end
+    else
+      puts "FAIL2"
+    end
+    
+    redirect_to current_user
+    
   end
 
   private

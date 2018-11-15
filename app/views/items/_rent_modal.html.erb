@@ -25,7 +25,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">$</span>
         </div>
-        <input type="text" class="form-control" id="total-price" aria-label="Amount (to the nearest dollar)">
+        <input type="text" class="form-control" id="total-price" value="<%= @item.price %>" aria-label="Amount (to the nearest dollar)">
       </div>
   </div>
 </div>
@@ -36,9 +36,9 @@
     </div>
     <div class="col-7">
       <select class="form-control" id="assistance_reason" name="assistance_reason">
-        <option>Select reason for assistance</option>
-        <option>Setup</option>
-        <option>Usage</option>
+        <option value="">Select reason for assistance</option>
+        <option value="Setup">Setup</option>
+        <option value="Usage">Usage</option>
       </select>
     </div>
 </div>
