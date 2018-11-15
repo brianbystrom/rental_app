@@ -233,7 +233,8 @@ Rental.create!(     user_id: 2,
                     seller_checkin_confirm: false,
                     total_price: 500,
                     assistance: false,
-                    comment: "Where would you like to meet?")
+                    comment: "Where would you like to meet?",
+                    approval: false)
                     
 Rental.create!(     user_id: 1,
                     item_id: 8,
@@ -243,4 +244,5 @@ Rental.create!(     user_id: 1,
                     seller_checkin_confirm: true,
                     total_price: 25,
                     assistance: false,
-                    comment: "Where would you like to meet?")
+                    comment: "Where would you like to meet?",
+                    approval: true)
