@@ -40,16 +40,14 @@ class RentalsController < ApplicationController
       @rental.total_price = @rental_days * @item.price
       @rental.approval = false
 
-      respond_to do |format|
+
         if @rental.save
-          puts
-          format.html { redirect_to @rental, notice: 'Rental was successfully created.' }
-          format.json { render :show, status: :created, location: @rental }
+          #format.html { redirect_to @rental, notice: 'Rental was successfully created.' }
+          redirect_to current_user
         else
           format.html { render :new }
           format.json { render json: @rental.errors, status: :unprocessable_entity }
         end
-      end
     else
       respond_to do |format|
         flash.now[:danger] = "Please sign in to rent an item."

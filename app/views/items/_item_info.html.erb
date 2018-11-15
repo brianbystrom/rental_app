@@ -62,7 +62,11 @@
         </div>
         <div class="row">
           <div class="item-option-container ml-auto mr-auto">
-            <button type="button" data-target="#RentModal" data-toggle="modal" class="btn btn-info item-option ml-2 <%= @disabled %>"><%= fa_icon('exchange') %>  <%= @rent_btn_text %></button>
+            <% if checked_in(@item) %>
+              <button type="button" data-target="#RentModal" data-toggle="modal" class="btn btn-info item-option ml-2"><%= fa_icon('exchange') %>  Rent</button>
+            <% else %>
+              <button type="button" class="btn btn-info item-option ml-2 disabled"><%= fa_icon('exchange') %>  Unavailable</button>
+            <% end %>
             <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('comment') %>  Contact</button>
             <button type="button" class="btn btn-info item-option ml-2"><%= fa_icon('bookmark') %>  Bookmark</button>
           </div>
