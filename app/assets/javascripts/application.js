@@ -34,7 +34,7 @@ $(document).ready(function() {
          var end_date = new Date(end_month + "/" + end_day + "/" + end_year);
          var diff = new Date(end_date - start_date);
          var days = diff/1000/60/60/24;
-         var total_price = days * price_per_day
+         var total_price = (days + 1) * price_per_day
          
          if(total_price < 0) {
             total_price = "Enter a end date after the start date.";
