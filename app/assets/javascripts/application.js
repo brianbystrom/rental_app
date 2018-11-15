@@ -22,7 +22,7 @@ $(document).ready(function() {
       $radio.closest('label').addClass('selected');
     }); 
     
-    $( "#_rental_end_date_3i, #_rental_end_date_2i " ).change(function() {
+    $( "#_rental_end_date_3i, #_rental_end_date_2i, #_rental_end_date_1i, #_rental_start_date_3i, #_rental_start_date_2i, #_rental_start_date_1i " ).change(function() {
          var price_per_day = parseFloat($("#price-per-day").text());
          var start_month = $("#_rental_start_date_2i").val();
          var start_day = $("#_rental_start_date_3i").val();
