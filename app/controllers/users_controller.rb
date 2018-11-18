@@ -41,15 +41,16 @@ class UsersController < ApplicationController
     @user.admin = false
     @user.status = false
 
-    respond_to do |format|
+
       if @user.save
         redirect_to action: "index", controller: "home"
-        format.json { render :show, status: :created, location: @user }
+        #format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        #format.html { render :new }
+        #format.json { render json: @user.errors, status: :unprocessable_entity }
+        redirect_to action: "index", controller: "home"
       end
-    end
+
   end
 
   # PATCH/PUT /users/1
