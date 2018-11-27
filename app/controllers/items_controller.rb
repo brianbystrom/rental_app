@@ -16,6 +16,31 @@ class ItemsController < ApplicationController
     @distance = @item.user.distance_to(@user_location)
     @similar_items = Item.where("tag like ?", "%#{@tags[0]}%").where.not(user_id: @item.user_id).where.not(:id => Rental.where(buyer_checkin_confirm: false).or(Rental.where(seller_checkin_confirm: false)))
     @user_other_items = @item.user.items.where.not(id: @item.id).where.not(:id => Rental.where(buyer_checkin_confirm: false).or(Rental.where(seller_checkin_confirm: false)))
+    
+    @rental_buyer_history = Rental.where(user_id: @item.user.id).where(buyer_checkin_confirm: true).where(seller_checkin_confirm: true)
+    @rental_seller_history = Rental.where(item_id: @item.user.items).where(buyer_checkin_confirm: true).where(seller_checkin_confirm: true)
+    
+    @rating_sum = 0
+    @rating_count = 0
+    
+    @rental_buyer_history.each do |brental|
+      @rating_sum = @rating_sum + brental.seller_rating
+      @rating_count = @rating_count + 1
+    end
+    
+    @rental_seller_history.each do |srental|
+      @rating_sum = @rating_sum + srental.buyer_rating
+      @rating_count = @rating_count + 1
+    end
+    
+    puts "RATING SUM: " + @rating_sum.to_s
+    puts "RATING COUNT: " + @rating_count.to_s
+    
+    if @rating_count > 0
+      @rating = (@rating_sum / @rating_count).ceil
+    else
+      @rating = 0
+    end
   end
 
   # GET /items/new

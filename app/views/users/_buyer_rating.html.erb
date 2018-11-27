@@ -1,0 +1,20 @@
+
+<%= form_tag(rentals_buyer_rental_rating_path(:rental_id => rental.id), :id => rental.id, remote: true, authenticity_token: true, method: "post") do %>
+  <div class="rating ml-auto mr-auto">
+    <label>
+      <input class="bhr <%= rental.id %>" type="radio" name="rating" value="5" title="5 stars"> 5
+    </label>
+    <label>
+      <input class="bhr <%= rental.id %>" type="radio" name="rating" value="4" title="4 stars"> 4
+    </label>
+    <label>
+      <input class="bhr <%= rental.id %>" type="radio" name="rating" value="3" title="3 stars"> 3
+    </label>
+    <label>
+      <input class="bhr <%= rental.id %>" type="radio" name="rating" value="2" title="2 stars"> 2
+    </label>
+    <label>
+      <input class="bhr <%= rental.id %>" type="radio" name="rating" value="1" title="1 star"> 1
+    </label>
+  </div>
+<% end %>

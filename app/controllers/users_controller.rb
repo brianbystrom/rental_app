@@ -10,10 +10,12 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    
     @user = User.find(params[:id])
     @rentals = @user.rentals.where(buyer_checkin_confirm: false).where(seller_checkin_confirm: false)
     @pending_items = Rental.where(item_id: @user.items).where(approval: false)
     puts "RENTALS: " + @rentals.count.to_s
+    puts "PENDING: " + @pending_items.count.to_s
     @rental_buyer_history = Rental.where(user_id: params[:id]).where(buyer_checkin_confirm: true).where(seller_checkin_confirm: true)
     @rental_seller_history = Rental.where(item_id: @user.items).where(buyer_checkin_confirm: true).where(seller_checkin_confirm: true)
     #@rental_history = @rental_buyer_history + @rental_seller_history
@@ -22,6 +24,28 @@ class UsersController < ApplicationController
     puts "SELLER HISTORY: " + @rental_seller_history.count.to_s
     puts @rental_seller_history
     #@ip_addr = request.env[‘REMOTE_ADDR’]
+    
+    @rating_sum = 0
+    @rating_count = 0
+    
+    @rental_buyer_history.each do |brental|
+      @rating_sum = @rating_sum + brental.seller_rating
+      @rating_count = @rating_count + 1
+    end
+    
+    @rental_seller_history.each do |srental|
+      @rating_sum = @rating_sum + srental.buyer_rating
+      @rating_count = @rating_count + 1
+    end
+    
+    puts "RATING SUM: " + @rating_sum.to_s
+    puts "RATING COUNT: " + @rating_count.to_s
+    
+    if @rating_count > 0
+      @rating = (@rating_sum / @rating_count).ceil
+    else
+      @rating = 0
+    end
   end
 
   # GET /users/new
