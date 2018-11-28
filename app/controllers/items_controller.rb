@@ -23,14 +23,22 @@ class ItemsController < ApplicationController
     @rating_sum = 0
     @rating_count = 0
     
-    @rental_buyer_history.each do |brental|
-      @rating_sum = @rating_sum + brental.seller_rating
-      @rating_count = @rating_count + 1
+    if @rental_buyer_history.count > 0
+      @rental_buyer_history.each do |brental|
+        if brental.seller_rating
+          @rating_sum = @rating_sum + brental.seller_rating
+          @rating_count = @rating_count + 1
+        end
+      end
     end
     
-    @rental_seller_history.each do |srental|
-      @rating_sum = @rating_sum + srental.buyer_rating
-      @rating_count = @rating_count + 1
+    if @rental_seller_history.count > 0
+      @rental_seller_history.each do |srental|
+        if srental.buyer_rating
+          @rating_sum = @rating_sum + srental.buyer_rating
+          @rating_count = @rating_count + 1
+        end
+      end
     end
     
     puts "RATING SUM: " + @rating_sum.to_s

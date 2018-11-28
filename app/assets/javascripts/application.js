@@ -24,7 +24,6 @@ $(document).ready(function() {
     
     $('.bhr').click(function() {
        var form = $(this).closest('form')[0];
-       alert($('input[name=rating]:checked').val());
        form.submit();
     });
     
