@@ -106,6 +106,54 @@ class RentalsController < ApplicationController
     redirect_to current_user
     
   end
+  
+  def buyer_rental_rating
+    puts "LETS GO"
+    puts params[:rental_id]
+    puts params[:rating]
+    
+    if current_user
+      
+      rental = Rental.find(params[:rental_id])
+      
+      if current_user.id == rental.user_id 
+        puts "HELLO1"
+        if params[:rating].to_i.between?(1, 5) && !rental.buyer_rating
+          puts "HELLO2"
+          rental.buyer_rating = params[:rating]
+          rental.save
+        end
+      end
+      
+      redirect_to current_user
+    else
+      redirect_to root_path
+    end
+  end
+  
+  def seller_rental_rating
+    puts "LETS GO"
+    puts params[:rental_id]
+    puts params[:rating]
+    
+    
+    if current_user
+      
+      rental = Rental.find(params[:rental_id])
+      puts rental.item.user_id
+      
+      if current_user.id == rental.item.user_id 
+        if params[:rating].to_i.between?(1, 5) && !rental.seller_rating
+          rental.seller_rating = params[:rating]
+          rental.save
+        end
+      end
+      
+      redirect_to current_user
+    else
+      redirect_to root_path
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

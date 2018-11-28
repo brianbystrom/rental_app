@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get     '/logout',      to: 'sessions#destroy'
   get     '/items/:id',   to: 'items#show'
   post    '/items/new',   to: 'items#new'
-  post     '/rentals/approve_rental', to: 'rentals#approve_rental'
+  post    '/rentals/approve_rental', to: 'rentals#approve_rental'
+  post    '/rentals/buyer_rental_rating', to: 'rentals#buyer_rental_rating'
+  post    '/rentals/seller_rental_rating', to: 'rentals#seller_rental_rating'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
