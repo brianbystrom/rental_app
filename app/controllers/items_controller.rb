@@ -4,7 +4,15 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    if params[:search]
+      puts "CAME HERE"
+      @items = Item.where("tag like ?", "%#{params[:search]}%")
+    else
+      puts "ALL"
+      @items = Item.all
+    end
+    
+    puts @items.count
   end
 
   # GET /items/1
@@ -130,7 +138,7 @@ class ItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item

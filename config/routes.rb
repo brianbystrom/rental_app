@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get     '/login',       to: 'sessions#new'
   post    '/login',       to: 'sessions#create'
   get     '/logout',      to: 'sessions#destroy'
+  get     '/items',       to: 'items#index'
   get     '/items/:id',   to: 'items#show'
   post    '/items/new',   to: 'items#new'
   post    '/rentals/approve_rental', to: 'rentals#approve_rental'

@@ -1,42 +1,62 @@
-<p id="notice"><%= notice %></p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<h1>Items</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Serial no</th>
-      <th>Name</th>
-      <th>Tag</th>
-      <th>Location</th>
-      <th>Price</th>
-      <th>Brand</th>
-      <th>Model</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <%= stylesheet_link_tag "home", media: "all" %>
 
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.user_id %></td>
-        <td><%= item.serial_no %></td>
-        <td><%= item.name %></td>
-        <td><%= item.tag %></td>
-        <td><%= item.location %></td>
-        <td><%= item.price %></td>
-        <td><%= item.brand %></td>
-        <td><%= item.model %></td>
-        <td><%= item.status %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <title>Album example for Bootstrap</title>
 
-<br>
+  </head>
 
-<%= link_to 'New Item', new_item_path %>
+  <body>
+
+<%= render 'home/navbar' %>
+
+    <main role="main">
+      <div class="p-3 p-md-5 text-white bg-info nav-buffer">
+    
+      </div>
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">eRent</h1>
+          <p class="lead text-muted">A peer-2-peer rental app to allow users to make some extra cash on the side renting out items they no longer use.</p>
+        </div>
+      </section>
+      
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    <%= yield %>
+    <p id="error"><%= flash[:error] %></p>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <% if @items.count > 0 %>
+            <div class="card-columns">
+              <% @items.each do |item| %>
+                <% puts item %>
+                <%= render 'home/item_card', item: item %>
+              <% end %>
+  
+            </div>
+          <% else %>
+            <div class="alert alert-info" role="alert">
+              No items matched your search results.
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </main>
+
+<%= render 'home/footer' %>
+
+  </body>
+</html>
