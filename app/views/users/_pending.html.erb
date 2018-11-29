@@ -25,12 +25,14 @@
                   </td>
                   <td><%= rental.assistance_reason %></td>
                   <td>
-                      <div class="btn-group">
-                      <%= button_to rentals_approve_rental_path(:rental_id => rental.id), remote: true, :class => "btn btn-info ml-2 d-inline", method: :post do %>
-                          <%= fa_icon("check") %>
+                      <div class="btn-group" role="group">
+                      <%= button_to rentals_approve_rental_path(:rental_id => rental.id), remote: true, :class => "btn btn-info", method: :post do %>
+                          <%= fa_icon("check-circle") %>
                       <% end %>
-                      <button type="button" class="btn btn-info ml-2 d-inline"><%= fa_icon('comment') %></button>
-                      </div>
+                      <%= button_to rentals_deny_rental_path(:rental_id => rental.id), remote: true, :class => "btn btn-info ml-1", method: :post do %>
+                          <%= fa_icon("times-circle") %>
+                      <% end %>
+                     </div>
                   </td>
                 </tr>
             <% end %>
@@ -43,3 +45,9 @@
         <% end %>
     </tbody>
 </table>
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-secondary">1</button>
+  <button type="button" class="btn btn-secondary">2</button>
+
+  
+</div>

@@ -107,6 +107,27 @@ class RentalsController < ApplicationController
     
   end
   
+  def deny_rental
+    puts "HELLO"
+    @rental_id = params[:rental_id]
+    puts @rental_id
+    
+    @rental = Rental.find(params[:rental_id])
+    
+    if current_user
+      if current_user.id == @rental.item.user_id
+        @rental.destroy
+      else
+        puts "FAIL1"
+      end
+    else
+      puts "FAIL2"
+    end
+    
+    redirect_to current_user
+    
+  end
+  
   def buyer_rental_rating
     puts "LETS GO"
     puts params[:rental_id]

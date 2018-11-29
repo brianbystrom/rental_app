@@ -14,7 +14,7 @@
             <% buyer_history.each do |rental| %>
                 <tr class="text-center">
                   <th scope="row"><%= rental.item.name %></th>
-                  <td><%= rental.user.username %></td>
+                  <td><%= rental.item.user.username %></td>
                   <td><%= rental.rental_start_date.strftime("%B %d, %Y") %></td>
                   <td><%= rental.rental_end_date.strftime("%B %d, %Y") %></td>
                   <td><%= number_to_currency(rental.total_price) %></td>
