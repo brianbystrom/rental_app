@@ -27,6 +27,9 @@
           <li class="nav-item">
             <a class="nav-link" id="pills-rentals-tab" data-toggle="pill" href="#pills-rentals" role="tab" aria-controls="pills-rentals" aria-selected="false">Current Rentals</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#pills-comments" role="tab" aria-controls="pills-comments" aria-selected="false">Comments</a>
+          </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-items" role="tabpanel" aria-labelledby="pills-items-tab">
@@ -81,6 +84,11 @@
                 <p class="ml-3">You currently don't have any items checked out from other users. Add one now!</p>
               </div>
             <% end %>
+          </div>
+          <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
+            <%= @comments.count %>
+          
+    
           </div>
         </div>
       </div>

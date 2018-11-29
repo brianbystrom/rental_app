@@ -25,6 +25,8 @@ class UsersController < ApplicationController
     puts @rental_seller_history
     #@ip_addr = request.env[‘REMOTE_ADDR’]
     
+    @comments = Comment.where(commented_id: params[:id])
+    
     @rating_sum = 0
     @rating_count = 0
     
