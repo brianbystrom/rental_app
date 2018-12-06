@@ -104,7 +104,7 @@
                   <div class="col-12">
                     <div class="alert alert-secondary" role="alert">
                       <strong><%= comment.user.fname + " " + comment.user.lname %></strong><br>
-                      <i><%= comment.created_at.strftime("%B %d, %Y") %></i><br><br>
+                      <i><%= comment.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%B %d, %Y") %></i><br><br>
                       <%= comment.body %>
                     </div>
                   </div>
@@ -162,7 +162,7 @@
                   <div class="col-12">
                     <div class="alert alert-secondary" role="alert">
                       <strong><%= comment.user.fname + " " + comment.user.lname %></strong><br>
-                      <i><%= comment.created_at.strftime("%B %d, %Y") %></i><br><br>
+                      <i><%= comment.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%B %d, %Y") %></i><br><br>
                       <%= comment.body %>
                     </div>
                   </div>

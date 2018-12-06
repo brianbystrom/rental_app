@@ -27,8 +27,36 @@
         
         
       </div>
+      <% end %>
+      
+      <% if current_user %>
+        <% if !checked_in(item) && !pending(item) %>
+          <% if buyer_rented(item) %>
+            <div class="card-footer">
+              <% if !buyer_checked_in(item) %>
+                <%= button_to rentals_buyer_checkin_confirm_path(:rental_id => current_rental(item)), remote: true, :class => "btn btn-info btn-block", method: :post do %>
+                    Buyer Check-in
+                <% end %>
+              <% else %>
+                <button class="btn btn-info btn-block" disabled>Awaiting Seller Check-in</button>
+              <% end %>
+            </div>
+          <% elsif seller_rented(item) %>
+            
+            <div class="card-footer">
+              <% if !seller_checked_in(item) %>
+                <%= button_to rentals_seller_checkin_confirm_path(:rental_id => current_rental(item)), remote: true, :class => "btn btn-info btn-block", method: :post do %>
+                    Seller Check-in
+                <% end %>
+              <% else %>
+                <button class="btn btn-info btn-block" disabled>Awaiting Buyer Check-in</button>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
-    <% end %>
+    
   </div>
 
 

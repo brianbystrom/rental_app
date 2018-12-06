@@ -175,6 +175,45 @@ class RentalsController < ApplicationController
       redirect_to root_path
     end
   end
+  
+  def buyer_checkin_confirm
+    
+    if current_user
+      
+      rental = Rental.find(params[:rental_id])
+      puts rental.user_id
+      
+      if current_user.id == rental.user_id
+        if rental.buyer_checkin_confirm == false && rental.approval == true
+          rental.buyer_checkin_confirm = true
+          rental.save
+        end
+      end
+    end
+    
+    redirect_to current_user
+    
+  end
+  
+  def seller_checkin_confirm
+    
+    if current_user
+      
+      rental = Rental.find(params[:rental_id])
+      puts rental.user_id
+      puts rental.id
+      
+      if current_user.id == rental.item.user_id
+        if rental.seller_checkin_confirm == false && rental.approval == true
+          rental.seller_checkin_confirm = true
+          rental.save
+        end
+      end
+    end
+    
+    redirect_to current_user
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

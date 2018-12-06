@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       @user = User.find(params[:id])
-      @rentals = @user.rentals.where(buyer_checkin_confirm: false).where(seller_checkin_confirm: false)
+      @rentals = @user.rentals.where(buyer_checkin_confirm: false).or(Rental.where(seller_checkin_confirm: false))
       @pending_items = Rental.where(item_id: @user.items).where(approval: false)
       puts "RENTALS: " + @rentals.count.to_s
       puts "PENDING: " + @pending_items.count.to_s
