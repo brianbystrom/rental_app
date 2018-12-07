@@ -1,0 +1,10 @@
+
+<span class="profile-rating">
+    <% orating = 5 - rating %>
+    <% (1..rating).each do |i| %>
+      <%= fa_icon('star') %>   
+    <% end %>
+    <% (1..orating).each do |i| %>
+      <%= fa_icon('star-o') %>   
+    <% end %>
+</span>

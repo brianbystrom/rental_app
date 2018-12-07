@@ -52,12 +52,8 @@
             <span class="profile-user-name"><%= item.user.fname %> <%= item.user.lname %></span>
             <% end %>
             </br>
-            <span class="profile-rating">
-            <%= fa_icon('star') %>
-            <%= fa_icon('star') %>
-            <%= fa_icon('star') %>
-            <%= fa_icon('star') %>
-            <%= fa_icon('star') %></span> (29)</br>
+              <%= render 'users/flat_rating', rating: @rating %>
+              (<%= @rating_count %>)</br>
           </div>
         </div>
         <div class="row">

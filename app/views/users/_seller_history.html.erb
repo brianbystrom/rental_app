@@ -19,7 +19,12 @@
                   <td><%= rental.rental_end_date.strftime("%B %d, %Y") %></td>
                   <td><%= number_to_currency(rental.total_price) %></td>
                   <td>
-                      <%= render 'rating' %>
+                      <% if rental.seller_rating %>
+                          <%= render 'flat_rating', rating: rental.seller_rating %>
+                      <% else %>
+                          <%= render 'seller_rating', rental: rental %>
+                      <% end %>
+                      
                   </td>
                 </tr>
             <% end %>

@@ -4,12 +4,8 @@
       </div>
       <div class="col bg-light nav-buffer text-center">
         <span class="profile-user-name mt-3"><%= user.fname + " " + user.lname %></span></br>
-          <span class="profile-rating">
-          <%= fa_icon('star') %>
-          <%= fa_icon('star') %>
-          <%= fa_icon('star') %>
-          <%= fa_icon('star') %>
-          <%= fa_icon('star') %></span> (29)</br>
+          <%= render 'flat_rating', rating: @rating %>
+          (<%= @rating_count %>)</br>
         <strong>Joined:</strong> <%= user.created_at.strftime("%B %Y") %></br>
         <strong>Location:</strong> <%= user.city + ", " + user.state %></br>
         <div class="verified-container d-flex justify-content-center mt-3">

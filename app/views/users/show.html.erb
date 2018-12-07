@@ -27,6 +27,9 @@
           <li class="nav-item">
             <a class="nav-link" id="pills-rentals-tab" data-toggle="pill" href="#pills-rentals" role="tab" aria-controls="pills-rentals" aria-selected="false">Current Rentals</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#pills-comments" role="tab" aria-controls="pills-comments" aria-selected="false">Comments</a>
+          </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-items" role="tabpanel" aria-labelledby="pills-items-tab">
@@ -82,6 +85,34 @@
               </div>
             <% end %>
           </div>
+          <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
+            <div class="row">
+              
+              <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                  Leave a comment for the user for others to see.
+                </div>
+                <%= form_with url: comments_path(commented_id: @user.id), :remote => true do |form| %>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
+                  <button class="btn btn-info float-right mt-3 mb-3" type="submit">Comment</button>
+                <% end %>
+              </div>
+            </div>
+            
+              <% @comments.each do |comment| %>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="alert alert-secondary" role="alert">
+                      <strong><%= comment.user.fname + " " + comment.user.lname %></strong><br>
+                      <i><%= comment.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%B %d, %Y") %></i><br><br>
+                      <%= comment.body %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            
+    
+          </div>
         </div>
       </div>
     <% else %>
@@ -90,8 +121,8 @@
           <a class="nav-link active" id="pills-items-tab" data-toggle="pill" href="#pills-items" role="tab" aria-controls="pills-items" aria-selected="true"><%= @user.fname %>'s Items</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-reviews-tab" data-toggle="pill" href="#pills-reviews" role="tab" aria-controls="pills-reviews" aria-selected="false">User Reviews</a>
-          </li>
+          <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#pills-comments" role="tab" aria-controls="pills-comments" aria-selected="false">Comments</a>
+        </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-items" role="tabpanel" aria-labelledby="pills-items-tab">
@@ -112,9 +143,34 @@
             </div>
           <% end %>
         </div>
-        <div class="tab-pane fade" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
-          <p class="ml-3">Coming soon!</p>
-        </div>
+        <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
+            <div class="row">
+              
+              <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                  Leave a comment for the user for others to see.
+                </div>
+                <%= form_with url: comments_path(commented_id: @user.id), :remote => true do |form| %>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
+                  <button class="btn btn-info float-right mt-3 mb-3" type="submit">Comment</button>
+                <% end %>
+              </div>
+            </div>
+            
+              <% @comments.each do |comment| %>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="alert alert-secondary" role="alert">
+                      <strong><%= comment.user.fname + " " + comment.user.lname %></strong><br>
+                      <i><%= comment.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%B %d, %Y") %></i><br><br>
+                      <%= comment.body %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            
+    
+          </div>
       </div>
     </div>  
     <% end %>
@@ -124,8 +180,8 @@
           <a class="nav-link active" id="pills-items-tab" data-toggle="pill" href="#pills-items" role="tab" aria-controls="pills-items" aria-selected="true"><%= @user.fname %>'s Items</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-reviews-tab" data-toggle="pill" href="#pills-reviews" role="tab" aria-controls="pills-reviews" aria-selected="false">User Reviews</a>
-          </li>
+          <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#pills-comments" role="tab" aria-controls="pills-comments" aria-selected="false">Comments</a>
+        </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-items" role="tabpanel" aria-labelledby="pills-items-tab">
@@ -146,9 +202,30 @@
             </div>
           <% end %>
         </div>
-        <div class="tab-pane fade" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
-          <p class="ml-3">Coming soon!</p>
-        </div>
+        <div class="tab-pane fade" id="pills-comments" role="tabpanel" aria-labelledby="pills-comments-tab">
+            <div class="row">
+              
+              <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                  Login to leave a comment for the user for others to see.
+                </div>
+              </div>
+            </div>
+            
+              <% @comments.each do |comment| %>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="alert alert-secondary" role="alert">
+                      <strong><%= comment.user.fname + " " + comment.user.lname %></strong><br>
+                      <i><%= comment.created_at.strftime("%B %d, %Y") %></i><br><br>
+                      <%= comment.body %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            
+    
+          </div>
       </div>
     </div>  
     <% end %>

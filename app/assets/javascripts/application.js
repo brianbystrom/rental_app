@@ -22,6 +22,11 @@ $(document).ready(function() {
       $radio.closest('label').addClass('selected');
     }); 
     
+    $('.bhr').click(function() {
+       var form = $(this).closest('form')[0];
+       form.submit();
+    });
+    
     $( "#_rental_end_date_3i, #_rental_end_date_2i, #_rental_end_date_1i, #_rental_start_date_3i, #_rental_start_date_2i, #_rental_start_date_1i " ).change(function() {
          var price_per_day = parseFloat($("#price-per-day").text());
          var start_month = $("#_rental_start_date_2i").val();
