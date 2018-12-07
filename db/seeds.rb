@@ -244,5 +244,32 @@ Rental.create!(     user_id: 1,
                     seller_checkin_confirm: true,
                     total_price: 25,
                     assistance: false,
+                    buyer_rating: 3,
+                    seller_rating: 5,
                     comment: "Where would you like to meet?",
                     approval: true)
+                    
+Rental.create!(     user_id: 3,
+                    item_id: 4,
+                    rental_start_date: Date.yesterday(),
+                    rental_end_date: Date.today(),
+                    buyer_checkin_confirm: true,
+                    seller_checkin_confirm: true,
+                    total_price: 25,
+                    assistance: false,
+                    buyer_rating: 5,
+                    seller_rating: 5,
+                    comment: "Where would you like to meet?",
+                    approval: true)
+                    
+Comment.create!(    user_id: 1,
+                    body: "This was a great experience, a pleasure to work with.",
+                    commented_id: 2)
+                    
+Comment.create!(    user_id: 5,
+                    body: "Amazing experience!",
+                    commented_id: 1)
+                    
+Comment.create!(    user_id: 6,
+                    body: "Thanks for the great rental, would rent from again 10/10!",
+                    commented_id: 1)
